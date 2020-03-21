@@ -23,6 +23,20 @@ $(document).ready(function() {
             role: role,
             startDate: startDate,
             monthlyRate: monthlyRate
-        });
-    });
+        });​
+        $('#employee-name').val('');
+        $('#role').val('');
+        $('#start-date').val('');
+        $('#monthly-rate').val('');
+    });​
+    db.ref().on('child_added', function(snapshot) {
+        var tr = $('<tr>');
+        var tdName = $('<td>').text(snapshot.val().name);
+        var tdRole = $('<td>').text(snapshot.val().role);
+        var tdStartDate = $('<td>').text(snapshot.val().startDate);
+        var tdMonthlyRate = $('<td>').text(snapshot.val().monthlyRate);
+        var tbody = $('tbody');​
+        tr.append(tdName, tdRole, tdStartDate, tdMonthlyRate);
+        tbody.append(tr);​
+    });​
 });
